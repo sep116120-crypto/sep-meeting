@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SEP Meeting Login</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 100px;">
+
+  <h1>SEP Meeting</h1>
+  <button onclick="login()">Login with Google</button>
+  <button onclick="logout()">Logout</button>
+
+  <p id="user"></p>
+
+  <script>
+    const supabase = window.supabase.createClient(
+      "https://ahzlctcvjzvkvplqvxvcf.supabase.co",
+      "sb_publishable_Ke3LUz0QnOyZvKnSOPElZA_1BN_sxdU"
+    );
+
+    async function login() {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google'
+      });
+    }
+
+    async function logout() {
+      await supabase.auth.signOut();
+      document.getElementById("user").innerText = "";
+    }
+
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        document.getElementById("user").inne…
