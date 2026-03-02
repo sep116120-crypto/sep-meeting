@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>SEP Meeting</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body style="text-align:center; margin-top:100px; font-family:sans-serif;">
 
   <h1>SEP Meeting</h1>
@@ -12,13 +14,13 @@
   <button onclick="logout()">Logout</button>
 
   <script>
-    const supabaseUrl = "https://YOUR_PROJECT_ID.supabase.co";
-    const supabaseKey = "YOUR_PUBLIC_ANON_KEY";
+    const supabaseUrl = "https://ahzlctcvjzvkplqvxvcf.supabase.co";
+    const supabaseKey = "sb_publishable_Ke3LUz0QnOyZvKnSOPElZA_1BN_sxdU";
 
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
     async function login() {
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { error } = await supabaseClient.auth.signInWithOAuth({
         provider: "google",
         options: {
           redirectTo: "https://sep-meeting.vercel.app"
@@ -29,9 +31,10 @@
     }
 
     async function logout() {
-      await supabase.auth.signOut();
+      await supabaseClient.auth.signOut();
       alert("Logged out");
     }
- </script>
+</script>
+
 </body>
 </html>
